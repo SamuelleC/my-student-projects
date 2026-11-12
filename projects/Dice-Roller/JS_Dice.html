@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dice Roller SHC</title>
+        <link rel="stylesheet" href="JS_Dice.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>DICE ROLLER</h1>
+            <img id="logo" src="Dice.jpg" alt="Dice">
+        </div>
+        <div class="inputContainer">
+            <input id="numDice" type="number" placeholder="Number of Dice">
+            <label for="Dice Type">Dice Type: </label>
+            <select name="Dice Type" id="numSide" onchange="getValue()">
+                <option value="4">D4</option>
+                <option value="6">D6</option>
+                <option value="8">D8</option>
+                <option value="10">D10</option>
+                <option value="12">D12</option>
+                <option value="20">D20</option>
+            </select>
+            <button id="rollDice" onclick="rollDice()">Roll</button>
+        </div>
+        <div class="dice_Container">
+            <div id="dice"></div>
+        </div>
+    </body>
+    <script>
+        function getValue() {
+            const type_of_dice = parseInt(document.getElementById("numSide").value);
+        }
+        function rollDice() {
+            getValue();
+            let diceElem = document.getElementById("dice");
+            const number_of_dice = parseInt(document.getElementById("numDice").value);
+            const type_of_dice = parseInt(document.getElementById("numSide").value);
+            diceElem.innerHTML = "";
+            for (let i = 1; i <= number_of_dice; i++) {  
+                if (type_of_dice == 4) {
+                    let dice = Math.floor(Math.random() * 4) + 1;
+                    let diceContainer = "<div class='dice_box'>"+"Dice " + i + "<br/>" + dice + "</div>";
+                    diceElem.style.backgroundColor = "#e02c1f";
+                    diceElem.style.color = "white";
+                    diceElem.style.padding = "15px";
+                    diceElem.style.border = "solid";
+                    diceElem.innerHTML = diceElem.innerHTML + diceContainer;
+                }
+                else if (type_of_dice == 6) {
+                    let dice = Math.floor(Math.random() * 6) + 1;
+                    let diceContainer = "<div class='dice_box'>"+"Dice " + i + "<br />" + dice + "</div>";
+                    diceElem.style.backgroundColor = "#e02c1f";
+                    diceElem.style.color = "white";
+                    diceElem.style.padding = "15px";
+                    diceElem.style.border = "solid";
+                    diceElem.innerHTML = diceElem.innerHTML + diceContainer;
+                }   
+                else if (type_of_dice == 8) {
+                    let dice = Math.floor(Math.random() * 8) + 1;
+                    let diceContainer = "<div class='dice_box'>"+"Dice " + i + "<br />" + dice + "</div>";
+                    diceElem.style.backgroundColor = "#e02c1f";
+                    diceElem.style.color = "white";
+                    diceElem.style.padding = "15px";
+                    diceElem.style.border = "solid";
+                    diceElem.innerHTML = diceElem.innerHTML + diceContainer;
+                }
+                else if (type_of_dice == 10) {
+                    let dice = Math.floor(Math.random() * 10) + 1;
+                    let diceContainer = "<div class='dice_box'>"+"Dice " + i + "<br />" + dice + "</div>";
+                    diceElem.style.backgroundColor = "#e02c1f";
+                    diceElem.style.color = "white";
+                    diceElem.style.padding = "15px";
+                    diceElem.style.border = "solid";
+                    diceElem.innerHTML = diceElem.innerHTML + diceContainer;
+                }
+                else if (type_of_dice == 12) {
+                    let dice = Math.floor(Math.random() * 12) + 1;
+                    let diceContainer = "<div class='dice_box'>"+"Dice " + i + "<br />" + dice + "</div>";
+                    diceElem.style.backgroundColor = "#e02c1f";
+                    diceElem.style.color = "white";
+                    diceElem.style.padding = "15px";
+                    diceElem.style.border = "solid";
+                    diceElem.innerHTML = diceElem.innerHTML + diceContainer;
+                }
+                else if (type_of_dice == 20) {
+                    let dice = Math.floor(Math.random() * 20) + 1;
+                    let diceContainer = "<div class='dice_box'>"+"Dice " + i + "<br />" + dice + "</div>";
+                    diceElem.style.backgroundColor = "#e02c1f";
+                    diceElem.style.color = "white";
+                    diceElem.style.padding = "15px";
+                    diceElem.style.border = "solid";
+                    diceElem.innerHTML = diceElem.innerHTML + diceContainer;
+                }
+            }
+        }
+    </script>
+</html>
