@@ -542,12 +542,11 @@ nav ul li a:hover {
     gap: 40px;
     max-width: 1300px;
     margin: 0 auto;
-    padding: 70px 3% 60px;
+    padding: 6vh 3% 60px;
 }
 
 .cb-center { 
     grid-area: chat;
-    position: relative;
     display: flex;
     align-self: stretch;
     justify-self: center;
@@ -744,9 +743,9 @@ nav ul li a:hover {
 }
 
 .bot-container { 
-    position: absolute;
-    top: -56px;
-    right: 16px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
 #robot { 
@@ -825,7 +824,7 @@ nav ul li a:hover {
             "chat"
             "questions"
             "questions2";
-        padding: 70px 20px 60px;
+        padding: 20px 20px 60px;
     }
 
     .cb-container { 
