@@ -1,5 +1,19 @@
 const PROJECTS = [
     {
+        slug: "menty",
+        title: "Menty",
+        description: "My senior high school thesis: a stress and anxiety chatbot website with a blog, services page, and a 24/7 support chatbot.",
+        path: "projects/Menty/home.html",
+        tags: ["Thesis", "HTML", "CSS", "JavaScript"],
+    },
+    {
+        slug: "dice-roller",
+        title: "Dice Roller",
+        description: "Roll any number of D4 to D20 dice at once and see each result laid out individually.",
+        path: "projects/Dice-Roller/JS_Dice.html",
+        tags: ["HTML", "CSS", "JavaScript"],
+    },
+    {
         slug: "survey-form",
         title: "Survey Form",
         description: "A screen-time survey with text inputs, checkboxes, radio buttons, and a dropdown, all with native validation.",
