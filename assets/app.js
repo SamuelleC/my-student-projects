@@ -52,12 +52,13 @@ const cardTemplate = document.querySelector("#project-card");
 
 const viewer = document.querySelector("[data-viewer]");
 const viewerTitle = viewer.querySelector("[data-viewer-title]");
-const viewerFrame = viewer.querySelector("[data-viewer-frame]");
 const viewerExternal = viewer.querySelector("[data-viewer-external]");
 const viewerClose = viewer.querySelector("[data-viewer-close]");
+let viewerFrame = viewer.querySelector("[data-viewer-frame]");
 
-let openedFromLauncher = false;
-let lastFocusedCard = null;
+const LAUNCHER_TITLE = document.title;
+
+let activeProject = null;
 
 const previewObserver = new ResizeObserver((entries) => {
     for (const { target, contentRect } of entries) {
@@ -69,9 +70,10 @@ const previewObserver = new ResizeObserver((entries) => {
 function renderCard(project, index) {
     const card = cardTemplate.content.cloneNode(true);
 
-    card.querySelector("[data-card-link]").href = `#/${project.slug}`;
+    const link = card.querySelector("[data-card-link]");
+    link.href = `#/${project.slug}`;
+    link.textContent = project.title;
     card.querySelector("[data-card-index]").textContent = String(index + 1).padStart(2, "0");
-    card.querySelector("[data-card-title]").textContent = project.title;
     card.querySelector("[data-card-description]").textContent = project.description;
 
     const frame = card.querySelector("[data-card-frame]");
@@ -92,14 +94,27 @@ function renderCard(project, index) {
     return card;
 }
 
-function openViewer(project) {
-    if (viewerFrame.getAttribute("src") !== project.path) {
-        viewerFrame.src = project.path;
+// A fresh iframe per project fully unloads the previous one and keeps the
+// pages browsed inside it out of the launcher's own history.
+function replaceViewerFrame(project) {
+    const frame = viewerFrame.cloneNode(false);
+    frame.removeAttribute("src");
+    if (project) {
+        frame.src = project.path;
+        frame.title = project.title;
     }
-    viewerFrame.title = project.title;
+    viewerFrame.replaceWith(frame);
+    viewerFrame = frame;
+}
+
+function openViewer(project) {
+    if (project === activeProject) return;
+    activeProject = project;
+
+    replaceViewerFrame(project);
     viewerTitle.textContent = project.title;
     viewerExternal.href = project.path;
-    document.title = `${project.title} · Student Projects`;
+    document.title = `${project.title} · ${LAUNCHER_TITLE}`;
 
     viewer.classList.replace("hidden", "flex");
     launcher.inert = true;
@@ -108,52 +123,39 @@ function openViewer(project) {
 }
 
 function closeViewer() {
+    if (!activeProject) return;
+    const { slug } = activeProject;
+    activeProject = null;
+
+    replaceViewerFrame(null);
+    document.title = LAUNCHER_TITLE;
+
     viewer.classList.replace("flex", "hidden");
     launcher.inert = false;
     document.body.classList.remove("overflow-hidden");
-    viewerFrame.removeAttribute("src");
-    document.title = "Student Projects · Samuelle Celis";
-    lastFocusedCard?.focus();
-}
-
-function currentProject() {
-    const slug = location.hash.replace(/^#\/?/, "");
-    return PROJECTS.find((project) => project.slug === slug);
+    list.querySelector(`[href="#/${slug}"]`)?.focus();
 }
 
 function route() {
-    const project = currentProject();
+    const slug = location.hash.replace(/^#\/?/, "");
+    const project = PROJECTS.find((item) => item.slug === slug);
     project ? openViewer(project) : closeViewer();
 }
 
-function exitViewer() {
-    if (openedFromLauncher) {
-        history.back();
-    } else {
-        history.replaceState(null, "", location.pathname + location.search);
-        route();
-    }
+function showLauncher() {
+    history.replaceState(null, "", location.pathname + location.search);
+    closeViewer();
 }
 
 list.append(...PROJECTS.map(renderCard));
 document.querySelector("[data-year]").textContent = new Date().getFullYear();
 
-list.addEventListener("click", (event) => {
-    const link = event.target.closest("[data-card-link]");
-    if (!link) return;
-    openedFromLauncher = true;
-    lastFocusedCard = link;
-});
-
-viewerClose.addEventListener("click", exitViewer);
+viewerClose.addEventListener("click", showLauncher);
 
 document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && currentProject()) exitViewer();
+    if (event.key === "Escape" && activeProject) showLauncher();
 });
 
-window.addEventListener("hashchange", () => {
-    if (!currentProject()) openedFromLauncher = false;
-    route();
-});
+window.addEventListener("hashchange", route);
 
 route();
