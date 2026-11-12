@@ -540,19 +540,23 @@ nav ul li a:hover {
     grid-template-areas: "questions chat questions2";
     align-items: start;
     gap: 40px;
-    padding: 6vh 3% 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 70px 3% 60px;
 }
 
 .cb-center { 
     grid-area: chat;
     position: relative;
+    display: flex;
+    align-self: stretch;
     justify-self: center;
     width: 100%;
     max-width: 500px;
-    margin-top: max(56px, calc(59vh - 290px));
 }
 
 .cb-container { 
+    flex: 1;
     width: 100%;
     min-height: 580px;
     background-color: rgba(255, 255, 255, 0.1);
@@ -761,10 +765,6 @@ nav ul li a:hover {
             "chat chat"
             "questions questions2";
     }
-
-    .cb-center { 
-        margin-top: 56px;
-    }
 }
 
 @media (max-width: 900px) {
@@ -825,7 +825,7 @@ nav ul li a:hover {
             "chat"
             "questions"
             "questions2";
-        padding: 20px 20px 60px;
+        padding: 70px 20px 60px;
     }
 
     .cb-container { 
