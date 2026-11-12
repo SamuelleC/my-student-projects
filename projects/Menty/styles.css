@@ -10,16 +10,21 @@
 }
 
 body { 
-    width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #0c192c;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
 }
 
 
 /* Navbar Area */
 .navbar { 
-    height: 14vh;
+    min-height: 14vh;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     padding-left: 4%;
     padding-right: 4%;
@@ -57,7 +62,7 @@ nav ul li a:hover {
 
 .home-container { 
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(banner.png);
     background-position: center;
     background-size: cover;
@@ -67,7 +72,7 @@ nav ul li a:hover {
 
 .home-header-container {
     display: flex;
-    height: 88%;
+    min-height: 88vh;
     align-items: center;
 }
 
@@ -77,12 +82,12 @@ nav ul li a:hover {
 
 .home-header-container2 h1 { 
     color: #335fd2;
-    font-size: 80px;
+    font-size: clamp(48px, 9vw, 80px);
 }
 
 .home-header-container2 h2 { 
     color: #5677b3;
-    font-size: 30px;
+    font-size: clamp(20px, 3.5vw, 30px);
 }
 
 .home-header-container2 button { 
@@ -108,15 +113,14 @@ nav ul li a:hover {
 }
 
 .home-card {
-    position: absolute;
-    top: 38%;
-    width: 580px;
-    height: 57%;
+    width: 100%;
+    max-width: 580px;
+    min-height: 57vh;
     display: inline-block;
     border-right: solid #fff;
     padding-right: 8%;
     padding: 12px 25px;
-    margin: 10px 5px;
+    margin: calc(19vh + 10px) 5px 10px;
     color: white;
     opacity: 90%;
     line-height: 2.5;
@@ -156,25 +160,29 @@ nav ul li a:hover {
     align-items: center;
     flex-direction: column;
 }
+.blog-heading-title { 
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 7.5%;
+}
+
 .blog-heading img { 
     width: 60px;
     height: 70px;
-    display: flex;
-    position: absolute;
-    left: 35%;
-    margin-bottom: 25px;
+    margin: -17px 0;
 }
 
 .blog-heading span { 
-    margin-top: 7.5%;
     font-size: 1.5rem;
     color: #335fd2;
 }
 
 .blog-heading h3 { 
-    font-size: 2.4rem;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
     color: #5677b3;
     font-weight: 600;
+    text-align: center;
 }
 
 .blog-container { 
@@ -257,11 +265,14 @@ nav ul li a:hover {
 }
 @media(max-width: 550px){
     .blog-box{
-        margin: 20px 10px;
+        margin: 20px 0;
         width: 100%;
     }
-    #blog{
+    #section2{
         padding: 20px;
+    }
+    .blog-heading-title{
+        margin-bottom: 12px;
     }
 } 
 
@@ -274,13 +285,13 @@ nav ul li a:hover {
 .service-container { 
     margin-top: 1px;
     width: 100%;
-    height: 100vh;
-    padding: 0 8%; 
+    min-height: 100vh;
+    padding: 0 8% 100px; 
     background-color: rgba(255, 255, 255, 0.1); 
 }
 
 .service-container h1 {
-    font-size: 3rem;
+    font-size: clamp(2.2rem, 7vw, 3rem);
     color: #0c192c;
     text-align: center;
     padding-top: 10%;
@@ -509,7 +520,7 @@ nav ul li a:hover {
         right: 0;
         width: 100%;
     }
-    .collapsible {
+    .collapsible-button {
         width: 100%;
         border: 0px;
         border-top: 3px solid white;
@@ -523,9 +534,27 @@ nav ul li a:hover {
 
 /* Chatbot Area */
 
+.cb-layout { 
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr) 300px;
+    grid-template-areas: "questions chat questions2";
+    align-items: start;
+    gap: 40px;
+    padding: 6vh 3% 60px;
+}
+
+.cb-center { 
+    grid-area: chat;
+    position: relative;
+    justify-self: center;
+    width: 100%;
+    max-width: 500px;
+    margin-top: max(56px, calc(59vh - 290px));
+}
+
 .cb-container { 
-    width: 500px;
-    height: 580px;
+    width: 100%;
+    min-height: 580px;
     background-color: rgba(255, 255, 255, 0.1);
     background-position: center;
     background-repeat: no-repeat;
@@ -540,11 +569,7 @@ nav ul li a:hover {
     border: 2px solid transparent;
     background-clip: padding-box;
     box-shadow: 10px 10px 10px #5677b3;
-    position: relative;
     line-height: 2;
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 #cb-heading { 
@@ -582,10 +607,8 @@ nav ul li a:hover {
 }
 
 .question-container { 
-    position: absolute;
-    left: 3%;
-    top: 20%;
-    width: 300px;
+    grid-area: questions;
+    width: 100%;
     border-bottom: 20px solid #5677b3;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -651,10 +674,8 @@ nav ul li a:hover {
 }
 
 .question-container2 { 
-    position: absolute;
-    left: 74%;
-    top: 20%;
-    width: 300px;
+    grid-area: questions2;
+    width: 100%;
     border-bottom: 20px solid #5677b3;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -720,14 +741,105 @@ nav ul li a:hover {
 
 .bot-container { 
     position: absolute;
-    display: flex;
-    top: 40.5%;
-    left: 61%;
-    width: 20px;
-    height: 20px;
+    top: -56px;
+    right: 16px;
 }
 
 #robot { 
-    width: 200px;
+    display: block;
+    width: auto;
     height: 90px;
+}
+
+
+/* Responsive Layout */
+
+@media (max-width: 1100px) {
+    .cb-layout { 
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+            "chat chat"
+            "questions questions2";
+    }
+
+    .cb-center { 
+        margin-top: 56px;
+    }
+}
+
+@media (max-width: 900px) {
+    .home-header-container { 
+        flex-direction: column;
+        justify-content: center;
+        gap: 40px;
+        padding: 60px 0;
+    }
+
+    .home-header-container2 { 
+        flex-basis: auto;
+        width: 100%;
+    }
+
+    .home-card { 
+        min-height: 0;
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar { 
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    nav { 
+        text-align: center;
+    }
+
+    nav ul li { 
+        margin: 0 8px;
+    }
+}
+
+@media (max-width: 700px) {
+    .home-container { 
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .home-card { 
+        padding: 12px 15px;
+    }
+
+    .home-card p { 
+        margin-left: 10px;
+        font-size: 16.5px;
+    }
+
+    .cb-layout { 
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "chat"
+            "questions"
+            "questions2";
+        padding: 20px 20px 60px;
+    }
+
+    .cb-container { 
+        min-height: 0;
+        padding: 40px 15px;
+    }
+
+    .ask-input input { 
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 1.1rem;
+    }
+
+    #answer-box { 
+        font-size: 1rem;
+    }
 }

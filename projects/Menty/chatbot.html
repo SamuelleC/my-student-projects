@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="styles.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,7 @@
     <body>
         <header>
             <div class="navbar">
-                <img class="logo" src="logo.png">
+                <img class="logo" src="logo.png" alt="Menty logo">
                 <nav>
                     <ul>
                         <li><a href="home.html">HOME |</a></li>
@@ -31,22 +31,8 @@
                 </nav>
             </div>
         </header>    
-        
-<!-- ChatBot Div Area-->
-        <div class="cb-container"> 
-            <h1 id="cb-heading">Ask Us Questions</h1>
-            <div class="ask-input">
-                <input type="text" id="question-box" onkeydown="if(event.keyCode == 13){chat()}"
-                placeholder="Kindly Tell Us Something">
-            </div>
-            <p id="answer-box">---------- RESPONSE ---------- <br><b><br>INSTRUCTIONS:</b><br>1. Input the Exact Words or<br>2. Type the Number</p>
-        </div>
-        <div class="bot-container">
-            <img id="robot" src="bot.png" >
-        </div>
-<!-- ChatBot Div Area-->
-        <section>
-            <div class="question-container">
+        <main class="cb-layout">
+            <section class="question-container">
                 <h2>Possible Questions</h2>
                 <ul>
                     <li><span>1</span>When Should I Get Professional Help?</li>
@@ -59,9 +45,25 @@
                     <li><span>8</span>How Vital is Diet for Mental Health?</li>
                     <li><span>9</span>How Can I Boost My Self-Esteem and Enhance my Body Image?</li>
                 </ul>
+            </section>
+
+<!-- ChatBot Div Area-->
+            <div class="cb-center">
+                <div class="cb-container">
+                    <h1 id="cb-heading">Ask Us Questions</h1>
+                    <div class="ask-input">
+                        <input type="text" id="question-box" onkeydown="if(event.keyCode == 13){chat()}"
+                        placeholder="Kindly Tell Us Something">
+                    </div>
+                    <p id="answer-box">---------- RESPONSE ---------- <br><b><br>INSTRUCTIONS:</b><br>1. Input the Exact Words or<br>2. Type the Number</p>
+                </div>
+                <div class="bot-container">
+                    <img id="robot" src="bot.png" alt="">
+                </div>
             </div>
-    
-            <div class="question-container2">
+<!-- ChatBot Div Area-->
+
+            <section class="question-container2">
                 <h2>Possible Questions 2</h2>
                 <ul>
                     <li><span>10</span>Is Dieting Harmful?</li>
@@ -74,11 +76,10 @@
                     <li><span>17</span>Difference Between Positive and Negative Symptomps?</li>
                     <li><span>18</span>What Causes Stress and Anxiety?<br><br><br></li>
                 </ul>
-            </div>
-        </section>
+            </section>
+        </main>
+
+        <footer>
+        </footer>
     </body>
-
-    <footer>
-
-    </footer>
 </html>
